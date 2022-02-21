@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { choiceContext } from "./Input";
-import { Box, BoxContainer } from "./Style";
+import Box from '@mui/material/Box';
+
 
 const Selector = ({ boxCount = 2 }) => {
   const { selected, setSelected } = useContext(choiceContext);
@@ -14,15 +15,21 @@ const Selector = ({ boxCount = 2 }) => {
     setSelected(value);
   }
   return (
-    <BoxContainer>
+    <Box 
+       sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        margin: '4px'
+       }}
+    >
       {countList.map((i) =>
         i === selected ? (
-          <Box bg="blue" key={i} onClick={() => clickHandler(i)} />
+          <Box sx={{ backgroundColor: "blue", height: 20, width: "100%", margin: '2px'}} key={i} onClick={() => clickHandler(i)} />
         ) : (
-          <Box key={i} onClick={() => clickHandler(i)} />
+          <Box sx={{ backgroundColor: "gray", height: 20, width: "100%", margin: '2px' }} key={i} onClick={() => clickHandler(i)} />
         )
       )}
-    </BoxContainer>
+    </Box>
   );
 };
 export default Selector;

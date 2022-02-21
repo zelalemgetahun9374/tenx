@@ -1,6 +1,12 @@
 import React, { useState, useContext, useEffect, createContext } from "react";
 import { FormContext } from "./Form";
 import Selector from "./Selector";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export const choiceContext = createContext();
 
@@ -23,8 +29,16 @@ export default function Input({ _value = "0", items = 1, name }) {
   }
 
   return (
-    <div>
+    <Box>
+      <Box 
+       sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        margin: '4px'
+       }}
+    >
       {name}
+      
       <select value={selected} onChange={(event) => clickHandler(event)}>
         <option value="0">&nbsp; / {items}</option>
         {countList.map((i) => (
@@ -33,12 +47,11 @@ export default function Input({ _value = "0", items = 1, name }) {
           </option>
         ))}
       </select>
-      <div>
+      </Box>
         <choiceContext.Provider value={{ selected, setSelected }}>
           <Selector boxCount={items} />
         </choiceContext.Provider>
-      </div>
-    </div>
+    </Box>
   );
 }
 
